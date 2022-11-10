@@ -1,0 +1,4 @@
+/db/data
+/db/my.cnf
+/db/sql
+!.gitkeep

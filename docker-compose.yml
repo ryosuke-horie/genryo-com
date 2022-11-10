@@ -1,0 +1,40 @@
+version: '3'
+services:
+  lara_base_web1:
+    build: .
+    container_name: lara_base_web1
+    volumes:
+      - ./web:/var/www/html/lara_base1
+    ports:
+      - 8081:8081
+      - 3000:3000
+  lara_base_db1:
+    image: mariadb:latest
+    container_name: lara_base_db1
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: lara_base1
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      TZ: Asia/Tokyoa
+    volumes:
+    - ./db/data:/var/lib/mysql
+    - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+    - ./db/sql:/docker-entrypoint-initdb.d
+    ports:
+    - 3306:3306
+
+# phpMyadominのコンテナ作成
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - lara_base_db1
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=lara_base_db1
+      - PMA_USER=laravel
+      - PMA_PASSWORD=secret
+    ports:
+      - "8080:80"
+    volumes:
+      - ./docker/phpmyadmin/sessions:/sessions
