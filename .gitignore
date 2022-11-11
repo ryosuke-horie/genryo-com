@@ -2,3 +2,7 @@
 /db/my.cnf
 /db/sql
 !.gitkeep
+/web/vendor
+/web/.env
+/web/composer.json
+/web/composer.lock
