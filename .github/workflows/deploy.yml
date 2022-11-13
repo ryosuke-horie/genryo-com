@@ -1,0 +1,32 @@
+name: deploy to xserver
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        - uses: borales/actions-yarn@v2.3.0
+          with:
+            cmd: install
+        - uses: borales/actions-yarn@v2.3.0
+          with:
+            cmd: build
+        - name: ssh key generate
+          run: echo "$SSH_PRIVATE_KEY" > key && chmod 600 key
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        - name: rsync deployments
+          uses: burnett01/rsync-deployments@5.1
+          with:
+            switches: -avz --delete
+            path: dist/
+            remote_path: /home/xs796289/xs796289.xsrv.jp/public_html/
+            remote_host: xs796289.xserver.jp
+            remote_user: phrv853818
+            remote_port: 10022
+            remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
