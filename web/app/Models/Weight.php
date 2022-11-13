@@ -10,6 +10,6 @@ class Weight extends Model
     use HasFactory;
 
     protected $table = 'weight';
-    protected $fillable = ['id', 'userId', 'weight'];
+    protected $fillable = ['id', 'userId', 'weight', 'date_key'];
 
 }

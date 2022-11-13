@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Weight;
 use Illuminate\Http\Request;
 use Auth;
+use Carbon\Carbon;
 
 class WeightController extends Controller
 {
@@ -91,7 +92,8 @@ class WeightController extends Controller
      * 入力ページ
      */
     public function input() {
-        return view('weight.input');
+        $now = Carbon::now()->format('Ymd');
+        return view('weight.input',compact('now'));
     }
 
     /**
@@ -105,6 +107,7 @@ class WeightController extends Controller
         $weight->create([
             'userId' => Auth::id(),
             'weight' => $request['weight'],
+            'date_key' => $request['date_key']
         ]);
 
         return redirect('/weight/index');
