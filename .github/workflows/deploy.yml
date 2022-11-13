@@ -1,33 +1,20 @@
-name: deploy to xserver
+name: Production Deploy
 
-on:
-  push:
-    branches:
-      - main
-
+on:                       # トリガーの設定
+  release:                # リリースイベント時に実行
+    types: [main]    # ブランチの指定
+      
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action   # ジョブの名前
+    runs-on: ubuntu-latest    # 仮想環境の指定
+
     steps:
-        # - uses: actions/checkout@v2
-        # - uses: borales/actions-yarn@v2.3.0
-        #   with:
-        #     cmd: install
-        # - uses: borales/actions-yarn@v2.3.0
-        #   with:
-        #     cmd: build
-        - name: ssh key generate
-          run: echo "$SSH_PRIVATE_KEY" > key && chmod 600 key
-          env:
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        - name: rsync deployments
-          uses: burnett01/rsync-deployments@5.1
-          with:
-            switches: -avz --delete
-            path: dist/
-            remote_path: /home/xs796289/xs796289.xsrv.jp/public_html/
-            remote_host: xs796289.xsrv.jp
-            remote_user: xs796289
-            remote_port: 10022
-            remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-            
+        - uses: actions/checkout@v2   # チェックアウトアクション（https://github.com/actions/checkout）
+        - name: FTP-Deploy-Action
+            uses: SamKirkland/FTP-Deploy-Action@4.2.0   # FTPアップロードアクション（https://github.com/SamKirkland/FTP-Deploy-Action）
+            with:
+                server: ${{ secrets.PROD_SERVER }}        # FTPのサーバーアドレス
+                username: ${{ secrets.PROD_USERNAME }}    # FTPのユーザー名名
+                password: ${{ secrets.PROD_PASSWORD }}    # FTPのパスワード
+                server-dir: /home/xs796289/genryo-com/web/    # アップロード先のリモートパス
