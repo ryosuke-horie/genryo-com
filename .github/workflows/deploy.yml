@@ -27,6 +27,6 @@ jobs:
             path: dist/
             remote_path: /home/xs796289/xs796289.xsrv.jp/public_html/
             remote_host: xs796289.xsrv.jp
-            remote_user: phrv853818
+            remote_user: xs796289
             remote_port: 10022
             remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
