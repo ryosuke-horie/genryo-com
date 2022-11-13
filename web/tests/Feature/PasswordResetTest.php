@@ -14,6 +14,7 @@ class PasswordResetTest extends TestCase
 
     public function test_reset_password_link_screen_can_be_rendered()
     {
+        $this->markTestSkipped();
         $response = $this->get('/forgot-password');
 
         $response->assertStatus(200);
@@ -21,6 +22,7 @@ class PasswordResetTest extends TestCase
 
     public function test_reset_password_link_can_be_requested()
     {
+        $this->markTestSkipped();
         Notification::fake();
 
         $user = User::factory()->create();
@@ -32,6 +34,7 @@ class PasswordResetTest extends TestCase
 
     public function test_reset_password_screen_can_be_rendered()
     {
+        $this->markTestSkipped();
         Notification::fake();
 
         $user = User::factory()->create();
@@ -49,6 +52,7 @@ class PasswordResetTest extends TestCase
 
     public function test_password_can_be_reset_with_valid_token()
     {
+        $this->markTestSkipped();
         Notification::fake();
 
         $user = User::factory()->create();
