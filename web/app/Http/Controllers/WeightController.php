@@ -11,10 +11,11 @@ use Carbon\Carbon;
 class WeightController extends Controller
 {
     /**
-     * 初期ページ
+     * 体重管理の初期ページ
      */
     public function index(Request $request)
     {
+        // １週間分の日付を取得。
         $now   = new Carbon('now');
         $one   = new Carbon('-1 day');
         $two   = new Carbon('-2 day');
@@ -23,11 +24,7 @@ class WeightController extends Controller
         $five  = new Carbon('-5 day');
         $six   = new Carbon('-6 day');
 
-        $avg_weihgt_log = [];
-        $max_weihgt_log = [];
-        $min_weihgt_log = [];
-
-        // 取り出す対象
+        // 取り出す対象日時
         $target_days = [
             $six->format('Ymd'),
             $five->format('Ymd'),
@@ -38,8 +35,15 @@ class WeightController extends Controller
             $now->format('Ymd'),
         ];
 
+        // 体重データ
+        $Weight = new Weight();
+
+        // 1週間分の体重のデータを取得。
+        $avg_weihgt_log = [];
+        $max_weihgt_log = [];
+        $min_weihgt_log = [];
         foreach ($target_days as $date_key) {
-            list($avg, $max, $min) = $this->getWeightLogData($date_key);
+            list($avg, $max, $min) = $Weight->getWeightLogData($date_key);
             $avg_weihgt_log[] = $avg;
             $max_weihgt_log[] = $max;
             $min_weihgt_log[] = $min;
@@ -60,35 +64,6 @@ class WeightController extends Controller
             "min_weight_log" => $min_weihgt_log,
             "now"            => $now,
         ]);
-    }
-
-    /**
-     * 体重データをchart.js用に取得する
-     *
-     * @param [type] $date_key
-     * @return void
-     */
-    function getWeightLogData($date_key)
-    {
-        $sum = 0;
-        $min = 0;
-        $max = 100;
-        $logs = Weight::where("date_key", "like", $date_key . "%")->get();
-
-        foreach ($logs as $log) {
-            $weight = $log->weight;
-            $sum += $weight;
-            $min = max($min, $weight);
-            $max = min($max, $weight);
-        }
-
-        $avg = ($logs->count() > 0) ? $sum / $logs->count() : 0;
-
-        return [
-            $avg,
-            $min,
-            $max
-        ];
     }
 
     /**
