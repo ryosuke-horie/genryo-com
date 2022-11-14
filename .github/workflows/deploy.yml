@@ -26,7 +26,7 @@ jobs:
             switches: -avz --delete
             path: dist/
             remote_path: /home/xs796289/xs796289.xsrv.jp/genryo-com/
-            remote_host: sv14336.xserver.jp
-            remote_user: phrv853818
+            remote_host: xs796289.xsrv.jp
+            remote_user: xs796289
             remote_port: 10022
             remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
