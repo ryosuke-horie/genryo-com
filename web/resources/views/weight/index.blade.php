@@ -53,7 +53,7 @@
                         options: {
                             title: {
                                 display: true,
-                                text: '体重ログ（６ヶ月平均）'
+                                text: '体重ログ（1週間平均）'
                             }
                         }
                     });
