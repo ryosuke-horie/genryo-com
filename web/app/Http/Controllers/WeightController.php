@@ -14,6 +14,9 @@ class WeightController extends Controller
      * 初期ページ
      */
     public function index(Request $request) {
+
+    $now = Carbon::now()->format('Ymd');
+
     $avg_weihgt_log = [];
 	$max_weihgt_log = [];
 	$min_weihgt_log = [];
@@ -50,6 +53,7 @@ class WeightController extends Controller
 		"avg_weight_log" => $avg_weihgt_log,
 		"max_weight_log" => $max_weihgt_log,
 		"min_weight_log" => $min_weihgt_log,
+        "now"            => $now,        
 	]);
     }
 
