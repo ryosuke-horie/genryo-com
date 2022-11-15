@@ -1,5 +1,8 @@
-<h1>グラフ</h1>
-<canvas id="myChart"></canvas>
+<div class="wrap-chart">
+    <div class="chart-container" style="position: relative; width: 100%; height: 95%;">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <!-- グラフを描画 -->
 <script>
@@ -45,7 +48,16 @@
             title: {
                 display: true,
                 text: '体重ログ（1週間平均）'
-            }
+            },
+            maintainAspectRatio: false, // 固定アスペクト比を解除
+            yAxes: [
+            {
+                scaleLabel: {
+                    display: window.screen.width > 414,
+                    //省略
+                },
+            },
+        ]
         }
     });
 </script>
