@@ -62,7 +62,7 @@ class WeightController extends Controller
             "avg_weight_log" => $avg_weihgt_log,
             "max_weight_log" => $max_weihgt_log,
             "min_weight_log" => $min_weihgt_log,
-            "now"            => $now,
+            "now"            => $now->format('Ymd'),
         ]);
     }
 
