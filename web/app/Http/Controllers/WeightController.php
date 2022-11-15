@@ -39,14 +39,10 @@ class WeightController extends Controller
         $Weight = new Weight();
 
         // 1週間分の体重のデータを取得。
-        $avg_weihgt_log = [];
-        $max_weihgt_log = [];
-        $min_weihgt_log = [];
+        $weihgt_log = [];
         foreach ($target_days as $date_key) {
-            list($avg, $max, $min) = $Weight->getWeightLogData($date_key);
-            $avg_weihgt_log[] = $avg;
-            $max_weihgt_log[] = $max;
-            $min_weihgt_log[] = $min;
+            $log = $Weight->getWeightLogData($date_key);
+            $weihgt_log[] = $log;
         }
 
         return view("weight.index", [
@@ -59,10 +55,8 @@ class WeightController extends Controller
                 $one->format('m月d日'),
                 $now->format('m月d日'),
             ],
-            "avg_weight_log" => $avg_weihgt_log,
-            "max_weight_log" => $max_weihgt_log,
-            "min_weight_log" => $min_weihgt_log,
-            "now"            => $now,
+            "weight_log" => $weihgt_log,
+            "now"            => $now->format('Ymd'),
         ]);
     }
 
