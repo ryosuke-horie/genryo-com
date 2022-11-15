@@ -9,9 +9,7 @@
                 {{-- グラフ部分の読み込み --}}
                 @include('weight.weight-graph', [
                     'label' => $label,
-                    'avg_weight_log' => $avg_weight_log,
-                    'max_weight_log' => $max_weight_log,
-                    'min_weight_log' => $min_weight_log,
+                    'weight_log' => $weight_log,
                 ])
             </div>
 

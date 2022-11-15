@@ -20,24 +20,13 @@ class Weight extends Model
      */
     public function getWeightLogData($date_key)
     {
-        $sum = 0;
-        $min = 0;
-        $max = 100;
+        $weight = 0;   
         $logs = Weight::where("date_key", "like", $date_key . "%")->get();
 
         foreach ($logs as $log) {
             $weight = $log->weight;
-            $sum += $weight;
-            $min = max($min, $weight);
-            $max = min($max, $weight);
         }
 
-        $avg = ($logs->count() > 0) ? $sum / $logs->count() : 0;
-
-        return [
-            $avg,
-            $min,
-            $max
-        ];
+        return $weight;
     }
 }
