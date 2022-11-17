@@ -92,7 +92,7 @@ class WeightController extends Controller
             'date_key' => $request['date_key']
         ]);
 
-        return redirect('/weight/index');
+        return redirect('/weight');
     }
 
     /**
