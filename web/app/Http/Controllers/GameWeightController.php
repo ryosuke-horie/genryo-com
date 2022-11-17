@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GameWeight;
 use Illuminate\Http\Request;
+use Auth;
 
 class GameWeightController extends Controller
 {
@@ -14,7 +15,7 @@ class GameWeightController extends Controller
      */
     public function index()
     {
-        //
+        return view('gameWeight.index');
     }
 
     /**
@@ -35,7 +36,16 @@ class GameWeightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 登録機能
+        $weight = new GameWeight();
+        $weight->create([
+            'user_id'     => Auth::id(),
+            'game_weight' => $request['game_weight'],
+            'weight_in'   => $request['weight_in']
+        ]);
+
+        // 登録後は体重のインデックスページに遷移。
+        return redirect('/weight/index');
     }
 
     /**

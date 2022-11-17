@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class GameWeight extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'game_weight',
+        'weight_in',
+    ];
+
+    protected $table = 'game_weight';
 }

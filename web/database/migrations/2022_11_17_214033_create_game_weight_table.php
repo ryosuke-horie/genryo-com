@@ -15,6 +15,9 @@ class CreateGameWeightTable extends Migration
     {
         Schema::create('game_weight', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->decimal('game_weight', $precision = 5, $scale = 2);
+            $table->dateTime('weight_in', $precision = 0);
             $table->timestamps();
         });
     }

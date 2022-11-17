@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ComponentTestController;
 use App\Http\Controllers\LifeCycleController;
 use App\Http\Controllers\WeightController;
+use App\Http\Controllers\GameWeightController;
 
 Route::get('/', function () {
     return view('user.welcome');
@@ -19,16 +20,6 @@ Route::get('/dashboard', function () {
 Route::get('/weight/index', [WeightController::class, 'index'])->middleware(['auth:users']);
 
 /**
- * 表示ページ
- */
-Route::get('/weight/show', [WeightController::class, 'show'])->middleware(['auth:users']);
-
-/**
- * 編集ページ
- */
-Route::get('/weight/edit', [WeightController::class, 'edit'])->middleware(['auth:users']);
-
-/**
  * 入力ページ
  */
 Route::get('/weight/input', [WeightController::class, 'input'])->middleware(['auth:users']);
@@ -38,10 +29,10 @@ Route::get('/weight/input', [WeightController::class, 'input'])->middleware(['au
  */
 Route::post('/weight/memoryWeight', [WeightController::class, 'memoryWeight'])->middleware(['auth:users']);
 
+// 試合体重設定
+Route::get('/gameWeight', [GameWeightController::class, 'index'])->middleware(['auth:users']);
 
-/**
- * 削除ページ
- */
-Route::get('/weight/delete', [WeightController::class, 'delete'])->middleware(['auth:users']);
+// 試合体重設定登録
+Route::post('/gameWeight/store', [GameWeightController::class, 'store'])->middleware(['auth:users']);
 
 require __DIR__.'/auth.php';
