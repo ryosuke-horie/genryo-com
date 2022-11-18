@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Models\Weight;
+use App\Models\GameWeight;
 
-class WeightRepository implements WeightRepositoryInterface
+class GameWeightRepository implements GameWeightRepositoryInterface
 {
     public function getSampleById($id)
     {
-        return Weight::find($id);
+        return GameWeight::find($id);
     }
 }
