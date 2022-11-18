@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Weight;
+use App\Models\GameWeight;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
@@ -45,6 +46,16 @@ class WeightController extends Controller
             $weihgt_log[] = $log;
         }
 
+        // 試合体重の設定
+        $GameWeight = new GameWeight();
+        $game_weight = $GameWeight->select('game_weight')->where('user_id', Auth::id())->first();
+        $weight_in = $GameWeight->select('weight_in')->where('user_id', Auth::id())->first();
+
+        $game_weight_log = [];
+        for ($i=1; $i<8; $i++) {
+            $game_weight_log[] = $game_weight['game_weight']; 
+        }
+
         return view("weight.index", [
             "label" => [
                 $six->format('m月d日'),
@@ -55,8 +66,11 @@ class WeightController extends Controller
                 $one->format('m月d日'),
                 $now->format('m月d日'),
             ],
-            "weight_log" => $weihgt_log,
-            "now"            => $now->format('Ymd'),
+            "weight_log"  => $weihgt_log,
+            "now"         => $now->format('Ymd'),
+            "game_weight" => $game_weight['game_weight'],
+            "weight_in"   => date('Y年m月d日',  strtotime($weight_in['weight_in'])),
+            "game_weight_log" => $game_weight_log,
         ]);
     }
 

@@ -4,6 +4,10 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('/css/weight.css') }}">
+    @include('weight.game-weight', [
+        "game_weight" => $game_weight,
+        "weight_in"   => $weight_in,
+    ])
     <section class="text-gray-600 body-font">
         <div class="container mx-auto flex px-5 py-24 flex-col items-center">
             <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
@@ -11,6 +15,7 @@
                 @include('weight.weight-graph', [
                     'label' => $label,
                     'weight_log' => $weight_log,
+                    "game_weight" => $game_weight_log,
                 ])
             </div>
 
