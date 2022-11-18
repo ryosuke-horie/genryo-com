@@ -45,7 +45,7 @@ class GameWeightController extends Controller
         ]);
 
         // 登録後は体重のインデックスページに遷移。
-        return redirect('/weight/index');
+        return redirect('/weight');
     }
 
     /**
