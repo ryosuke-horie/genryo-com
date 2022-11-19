@@ -9,14 +9,17 @@ use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
 use App\Services\WeightServiceInterface;
+use App\Services\GameWeightServiceInterface;
 
 class WeightController extends Controller
 {
     private weightServiceInterface $weight_service;
+    private gameWeightServiceInterface $game_weight_service;
 
-    public function __construct(WeightServiceInterface $weight_service)
+    public function __construct(WeightServiceInterface $weight_service, GameWeightServiceInterface $game_weight_service)
     {
         $this->weight_service = $weight_service;
+        $this->game_weight_service = $game_weight_service;
     }
 
     /**
@@ -47,15 +50,10 @@ class WeightController extends Controller
         // １週間分の体重ログデータ。
         $weihgt_log = $this->weight_service->getWeightLog($target_days);
 
-        // 試合体重の設定
-        $GameWeight = new GameWeight();
-        $game_weight = $GameWeight->select('game_weight')->where('user_id', Auth::id())->first();
-        $weight_in = $GameWeight->select('weight_in')->where('user_id', Auth::id())->first();
-
-        $game_weight_log = [];
-        for ($i = 1; $i < 8; $i++) {
-            $game_weight_log[] = $game_weight['game_weight'];
-        }
+        // 試合体重
+        $game_weight_log = $this->game_weight_service->getGameWeightByUserIdForWeek(Auth::id());
+        // 軽量日
+        $weight_in = $this->game_weight_service->getWeightInByUseId(Auth::id());
 
         return view("weight.index", [
             "label" => [
@@ -69,7 +67,7 @@ class WeightController extends Controller
             ],
             "weight_log" => $weihgt_log,
             "now" => $now->format('Ymd'),
-            "game_weight" => $game_weight['game_weight'],
+            "game_weight" => $game_weight_log[0],
             "weight_in" => date('Y年m月d日', strtotime($weight_in['weight_in'])),
             "game_weight_log" => $game_weight_log,
         ]);

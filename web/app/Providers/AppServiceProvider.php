@@ -17,12 +17,7 @@ class AppServiceProvider extends ServiceProvider
         // 体重
             \App\Repositories\WeightRepositoryInterface::class,
             \App\Repositories\WeightRepository::class,
-            // 試合体重
-            \App\Repositories\GameWeightRepositoryInterface::class,
-            \App\Repositories\GameWeightRepository::class,
         );
-
-        // 体重
         $this->app->bind(
             \App\Services\WeightServiceInterface::class,
             function ($app) {
@@ -33,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
         );
 
         // 試合体重
+        $this->app->bind(
+        // 試合体重
+            \App\Repositories\GameWeightRepositoryInterface::class,
+            \App\Repositories\GameWeightRepository::class,
+        );
         $this->app->bind(
             \App\Services\GameWeightServiceInterface::class,
             function ($app) {

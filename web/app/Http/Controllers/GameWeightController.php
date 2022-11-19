@@ -3,11 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\GameWeight;
+use App\Services\GameWeightServiceInterface;
 use Illuminate\Http\Request;
 use Auth;
 
+
 class GameWeightController extends Controller
 {
+    private gameWeightServiceInterface $game_weight_service;
+
+    public function __construct(GameWeightServiceInterface $game_weight_service)
+    {
+        $this->game_weight_service = $game_weight_service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,18 +40,13 @@ class GameWeightController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // 登録機能
-        $weight = new GameWeight();
-        $weight->create([
-            'user_id'     => Auth::id(),
-            'game_weight' => $request['game_weight'],
-            'weight_in'   => $request['weight_in']
-        ]);
+        // 登録
+        $this->game_weight_service->store(Auth::id(), $request);
 
         // 登録後は体重のインデックスページに遷移。
         return redirect('/weight');
@@ -51,7 +55,7 @@ class GameWeightController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GameWeight  $gameWeight
+     * @param \App\Models\GameWeight $gameWeight
      * @return \Illuminate\Http\Response
      */
     public function show(GameWeight $gameWeight)
@@ -62,7 +66,7 @@ class GameWeightController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GameWeight  $gameWeight
+     * @param \App\Models\GameWeight $gameWeight
      * @return \Illuminate\Http\Response
      */
     public function edit(GameWeight $gameWeight)
@@ -73,8 +77,8 @@ class GameWeightController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\GameWeight  $gameWeight
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\GameWeight $gameWeight
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, GameWeight $gameWeight)
@@ -85,7 +89,7 @@ class GameWeightController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\GameWeight  $gameWeight
+     * @param \App\Models\GameWeight $gameWeight
      * @return \Illuminate\Http\Response
      */
     public function destroy(GameWeight $gameWeight)
