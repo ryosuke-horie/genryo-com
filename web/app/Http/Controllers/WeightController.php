@@ -28,13 +28,13 @@ class WeightController extends Controller
     public function index(Request $request)
     {
         // １週間分の日付を取得。
-        $now = new Carbon('now');
-        $one = new Carbon('-1 day');
-        $two = new Carbon('-2 day');
+        $now   = new Carbon('now');
+        $one   = new Carbon('-1 day');
+        $two   = new Carbon('-2 day');
         $three = new Carbon('-3 day');
-        $four = new Carbon('-4 day');
-        $five = new Carbon('-5 day');
-        $six = new Carbon('-6 day');
+        $four  = new Carbon('-4 day');
+        $five  = new Carbon('-5 day');
+        $six   = new Carbon('-6 day');
 
         // 取り出す対象日時
         $target_days = [
@@ -49,7 +49,6 @@ class WeightController extends Controller
 
         // １週間分の体重ログデータ。
         $weihgt_log = $this->weight_service->getWeightLog($target_days);
-
         // 試合体重
         $game_weight_log = $this->game_weight_service->getGameWeightByUserIdForWeek(Auth::id());
         // 軽量日
@@ -65,10 +64,10 @@ class WeightController extends Controller
                 $one->format('m月d日'),
                 $now->format('m月d日'),
             ],
-            "weight_log" => $weihgt_log,
-            "now" => $now->format('Ymd'),
-            "game_weight" => $game_weight_log[0],
-            "weight_in" => date('Y年m月d日', strtotime($weight_in['weight_in'])),
+            "weight_log"      => $weihgt_log,
+            "now"             => $now->format('Ymd'),
+            "game_weight"     => $game_weight_log[0],
+            "weight_in"       => date('Y年m月d日', strtotime($weight_in['weight_in'])),
             "game_weight_log" => $game_weight_log,
         ]);
     }
