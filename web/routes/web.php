@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ComponentTestController;
-use App\Http\Controllers\LifeCycleController;
 use App\Http\Controllers\WeightController;
 use App\Http\Controllers\GameWeightController;
 
