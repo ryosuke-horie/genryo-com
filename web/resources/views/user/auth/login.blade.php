@@ -63,12 +63,14 @@
                                                 </a>
                                             </label>
                                         </div>
-                                        <button class="mt-3 text-lg font-semibold　bg-gray-800 w-full text-black rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
+                                        <button class="mt-3 text-lg font-semibold bg-gray-800 w-full text-black rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
                                             Login
                                         </button>
                                     </div>
                                 </form>
-                                <a href="{{ route('user.register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">登録</a>
+                                <div class="text-right">
+                                    <a href="{{ route('user.register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline text-right">登録</a>
+                                </div>
                             </div>
                         </div>
                     </div>
