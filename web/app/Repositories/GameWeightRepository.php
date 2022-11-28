@@ -13,7 +13,11 @@ class GameWeightRepository implements GameWeightRepositoryInterface
      */
     public function getGameWeightByUserId($userId)
     {
-        return GameWeight::select('game_weight')->where('user_id', $userId)->first();
+        $gameWeight = GameWeight::select('game_weight')->where('user_id', $userId)->first();
+        if(empty($gameWeight)) {
+            $gameWeight = '';
+        }
+        return $gameWeight;
     }
 
     /**

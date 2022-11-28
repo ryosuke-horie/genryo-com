@@ -6,11 +6,6 @@ use App\Models\Weight;
 
 class WeightRepository implements WeightRepositoryInterface
 {
-    public function getSampleById($id)
-    {
-        return Weight::find($id);
-    }
-
     /**
      * 日時を受け取り、その日の体重データを受け取る。
      * @param $date_key

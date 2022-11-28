@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Weight;
-use App\Models\GameWeight;
+// use App\Models\GameWeight;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
@@ -13,7 +13,7 @@ use App\Services\GameWeightServiceInterface;
 
 class WeightController extends Controller
 {
-    private weightServiceInterface $weight_service;
+    private weightServiceInterface     $weight_service;
     private gameWeightServiceInterface $game_weight_service;
 
     public function __construct(WeightServiceInterface $weight_service, GameWeightServiceInterface $game_weight_service)
@@ -23,7 +23,7 @@ class WeightController extends Controller
     }
 
     /**
-     * 体重管理の初期ページ
+     * 体重管理初期ページ
      */
     public function index(Request $request)
     {
@@ -49,8 +49,10 @@ class WeightController extends Controller
 
         // １週間分の体重ログデータ。
         $weihgt_log = $this->weight_service->getWeightLog($target_days);
-        // 試合体重
+        // 試合体重(グラフ用)
         $game_weight_log = $this->game_weight_service->getGameWeightByUserIdForWeek(Auth::id());
+        // 試合体重(表示用)
+        $game_weight = $this->game_weight_service->getGameWeightByUserId(Auth::id());
         // 軽量日
         $weight_in = $this->game_weight_service->getWeightInByUseId(Auth::id());
 
@@ -66,8 +68,8 @@ class WeightController extends Controller
             ],
             "weight_log"      => $weihgt_log,
             "now"             => $now->format('Ymd'),
-            "game_weight"     => $game_weight_log[0],
-            "weight_in"       => date('Y年m月d日', strtotime($weight_in['weight_in'])),
+            "game_weight"     => $game_weight,
+            "weight_in"       => $weight_in,
             "game_weight_log" => $game_weight_log,
         ]);
     }
@@ -108,18 +110,10 @@ class WeightController extends Controller
     }
 
     /**
-     * 編集ページ
+     * 詳細ページ
      */
-    public function edit(Request $request)
+    public function detail()
     {
-        return view('weight.edit');
-    }
-
-    /**
-     * 削除ページ
-     */
-    public function delete(Request $request)
-    {
-        return view('weight.delete');
+        return view('weight.detail');
     }
 }

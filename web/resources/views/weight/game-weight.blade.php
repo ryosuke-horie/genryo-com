@@ -9,7 +9,9 @@
               </svg>
             </div>
             <h2 class="text-lg text-gray-900 font-medium title-font mb-2">試合体重</h2>
-            <p class="leading-relaxed text-base">試合体重:{{ $game_weight }}kg（{{ $weight_in }}）</p>
+            @if (!empty($game_weight) && !empty($weight_in))
+              <p class="leading-relaxed text-base">試合体重:{{ $game_weight }}kg（{{ $weight_in }}）</p>                
+            @endif
           </div>
         </div>
     </div>

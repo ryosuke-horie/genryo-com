@@ -4,8 +4,8 @@ function moveInput() {
 }
 
 // 詳細ページに遷移。
-function moveShow() {
-    window.location.href = '/weight/show';
+function moveDetail() {
+    window.location.href = '/weight/detail';
 }
 
 // モーダルを隠す。
