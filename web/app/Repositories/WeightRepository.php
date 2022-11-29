@@ -22,4 +22,23 @@ class WeightRepository implements WeightRepositoryInterface
 
         return $weight;
     }
+
+    /**
+     * ユーザーIDをもとに体重のログデータを取得する。
+     *
+     * @param [type] $userId
+     * @return array
+     */
+    public function getWeightLogById($userId)
+    {
+        $weight_log = Weight::select('id', 'weight', 'updated_at')->where("userId", "=", $userId)->get();
+
+        if(!empty($weight_log)) {
+            $weiht_log_array = $weight_log->toArray();
+        } else {
+            $weiht_log_array = [];
+        }
+
+        return $weiht_log_array;
+    }
 }

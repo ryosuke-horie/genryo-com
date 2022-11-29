@@ -114,6 +114,7 @@ class WeightController extends Controller
      */
     public function detail()
     {
-        return view('weight.detail');
+        $weight_log = $this->weight_service->weightLogList(Auth::id());
+        return view('weight.detail', compact('weight_log'));
     }
 }
