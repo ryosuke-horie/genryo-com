@@ -10,14 +10,13 @@
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
       <a class="mr-5 hover:text-gray-900" href="/weight">体重遷移</a>
       <a class="mr-5 hover:text-gray-900" href="/gameWeight">試合体重設定</a>
-{{--      <a class="mr-5 hover:text-gray-900">Fourth Link</a>--}}
     </nav>
-      <form method="POST" action="{{ route('user.logout') }}">
-          @csrf
-          <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-              {{ __('Log out') }}
-          </button>
-      </form>
+    <form method="POST" action="{{ route('user.logout') }}">
+      @csrf
+      <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
+          {{ __('Log out') }}
+      </button>
+    </form>
   </div>
 </header>
 @endsection
