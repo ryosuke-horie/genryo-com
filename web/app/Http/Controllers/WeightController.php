@@ -124,13 +124,13 @@ class WeightController extends Controller
      * @param [type] $id
      * @return void
      */
-    public function edit($id) {
+    public function edit(Request $request) {
         // idを指定せずに直接遷移した場合はリダイレクト
-        if(empty($id)) {
+        if(empty($request->id)) {
             redirect('/weight/detail');
         }
 
-        $weight = $this->weight_service->getWeightDataById($id);
+        $weight = $this->weight_service->getWeightDataById($request->id);
 
         return view('weight.edit', compact('weight'));
     }
