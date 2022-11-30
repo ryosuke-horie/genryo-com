@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\GameWeight;
+use App\Models\Weight;
 
 class GameWeightRepository implements GameWeightRepositoryInterface
 {
@@ -23,11 +24,20 @@ class GameWeightRepository implements GameWeightRepositoryInterface
     /**
      * 試合体重をログインしたユーザーIDから取得する
      * @param $userId
-     * @return mixed
+     * @return string
      */
     public function getWeightInByUserId($userId)
     {
-        return GameWeight::select('weight_in')->where('user_id', $userId)->first();
+        $weight_in = GameWeight::select('weight_in')->where('user_id', $userId)->first();
+        
+        if(empty($weight_in)){
+            return '';
+        }
+
+        $weight_in = $weight_in->toArray();
+        $weight_in = $weight_in['weight_in'];
+
+        return $weight_in;
     }
 
     /**

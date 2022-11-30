@@ -40,7 +40,7 @@ class GameWeightService implements GameWeightServiceInterface
         /**
      * 試合体重をユーザーIDをもとに取得
      * @param $userId
-     * @return array
+     * @return
      */
     public function getGameWeightByUserId($userId)
     {
@@ -48,10 +48,12 @@ class GameWeightService implements GameWeightServiceInterface
         $game_weight = $this->game_weight_repository->getGameWeightByUserId($userId);
 
         if (empty($game_weight)) {
-            $game_weight = '';
+            return $game_weight = '';
         }
+
+        $game_weight = $game_weight->toArray();
         
-        return $game_weight;
+        return $game_weight['game_weight'];
     }
 
     /**
@@ -62,10 +64,11 @@ class GameWeightService implements GameWeightServiceInterface
     public function getWeightInByUseId($userId)
     {
         $weight_in = $this->game_weight_repository->getWeightInByUserId($userId);
-        if (empty($game_in)) {
+
+        if (empty($weight_in)) {
             $weight_in = '';
         } else {
-            $weight_in = date('Y年m月d日', strtotime($weight_in['weight_in']));
+            $weight_in = date('Y年m月d日', strtotime($weight_in));
         }
         return $weight_in;
     }

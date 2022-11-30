@@ -13,8 +13,8 @@
             <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
                 {{-- グラフ部分の読み込み --}}
                 @include('weight.weight-graph', [
-                    'label' => $label,
-                    'weight_log' => $weight_log,
+                    'label'       => $label,
+                    'weight_log'  => $weight_log,
                     "game_weight" => $game_weight_log,
                 ])
             </div>
