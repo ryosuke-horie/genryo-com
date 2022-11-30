@@ -19,6 +19,8 @@ Route::get('/dashboard', function () {
 Route::get('/weight', [WeightController::class, 'index'])->middleware(['auth:users']);
 // 詳細ページ
 Route::get('/weight/detail', [WeightController::class, 'detail'])->middleware(['auth:users']);
+// 編集ページ
+Route::get('/weight/edit/{id?}', [WeightController::class, 'edit'])->middleware(['auth:users']);
 // 入力ページ
 Route::get('/weight/input', [WeightController::class, 'input'])->middleware(['auth:users']);
 // 体重入力記録機能

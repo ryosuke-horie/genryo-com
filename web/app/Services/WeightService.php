@@ -53,4 +53,10 @@ class WeightService implements WeightServiceInterface
  
         return $weight_log;
     }
+
+    public function getWeightDataById($id){
+        $weight_log = $this->weight_repository->getWeightDataById($id);
+        
+        return $weight_log;
+    }
 }

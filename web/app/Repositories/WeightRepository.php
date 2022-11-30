@@ -41,4 +41,17 @@ class WeightRepository implements WeightRepositoryInterface
 
         return $weiht_log_array;
     }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return array
+     */
+    public function getWeightDataById($id){
+        $weight_log = Weight::where("id", "=", $id)->first();
+        $weight_log = $weight_log->toArray();
+
+        return $weight_log;
+    }
 }
