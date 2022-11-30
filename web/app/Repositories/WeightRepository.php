@@ -31,7 +31,7 @@ class WeightRepository implements WeightRepositoryInterface
      */
     public function getWeightLogById($userId)
     {
-        $weight_log = Weight::select('id', 'weight', 'updated_at')->where("userId", "=", $userId)->get();
+        $weight_log = Weight::select('id', 'weight', 'updated_at')->where("userId", "=", $userId)->orderby('updated_at', 'desc')->get();
 
         if(!empty($weight_log)) {
             $weiht_log_array = $weight_log->toArray();

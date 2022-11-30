@@ -14,7 +14,6 @@
             </thead>
             <tbody>
                 @foreach ($weight_log as $key => $val)
-                
                     <tr>
                         <td class="border px-4 py-2">{{ $val['updated_at'] }}</td>
                         <td class="border px-4 py-2">{{ $val['weight'] }}</td>
