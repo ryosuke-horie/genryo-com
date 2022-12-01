@@ -134,4 +134,11 @@ class WeightController extends Controller
 
         return view('weight.edit', compact('weight'));
     }
+
+
+    public function update(Request $request){
+        // 登録処理
+        $this->weight_service->update($request);
+        return redirect('/weight/detail');
+    }
 }
