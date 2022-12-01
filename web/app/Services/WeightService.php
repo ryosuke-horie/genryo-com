@@ -47,10 +47,27 @@ class WeightService implements WeightServiceInterface
 
         // Changing the display format of the recording date and time(updated_at).
         foreach($weight_log as $key => $val){
-            $recording_date = date('Y/m/d G:i',  strtotime($val['updated_at']));
-            $weight_log[$key]['updated_at'] = $recording_date;
+            $recording_date = date('Y/m/d G:i',  strtotime($val['memoried_at']));
+            $weight_log[$key]['memoried_at'] = $recording_date;
         }
  
         return $weight_log;
+    }
+
+    public function getWeightDataById($id){
+        $weight_log = $this->weight_repository->getWeightDataById($id);
+        
+        return $weight_log;
+    }
+
+    public function update($update_requests){
+        $weight_datas = $update_requests->toArray();
+
+        // 体重記録時間を調整し、配列を更新する
+        $replaced_momoried_at = str_replace('T', ' ', $weight_datas['memoried_at']);
+        $replaced_momoried_at = $replaced_momoried_at . ':00';
+        $weight_datas['memoried_at'] = $replaced_momoried_at;
+
+        $this->weight_repository->update_weight_log($weight_datas);
     }
 }

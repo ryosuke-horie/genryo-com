@@ -19,10 +19,14 @@ Route::get('/dashboard', function () {
 Route::get('/weight', [WeightController::class, 'index'])->middleware(['auth:users']);
 // 詳細ページ
 Route::get('/weight/detail', [WeightController::class, 'detail'])->middleware(['auth:users']);
+// 編集ページ
+Route::get('/weight/edit', [WeightController::class, 'edit'])->middleware(['auth:users']);
 // 入力ページ
 Route::get('/weight/input', [WeightController::class, 'input'])->middleware(['auth:users']);
 // 体重入力記録機能
 Route::post('/weight/memoryWeight', [WeightController::class, 'memoryWeight'])->middleware(['auth:users']);
+// 体重入力修正機能
+Route::post('/weight/update', [WeightController::class, 'update'])->middleware(['auth:users']);
 
 /**
  * 試合体重設定

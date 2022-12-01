@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Weight;
-// use App\Models\GameWeight;
 use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
@@ -117,5 +116,29 @@ class WeightController extends Controller
         // リスト表示
         $weight_log = $this->weight_service->weightLogList(Auth::id());
         return view('weight.detail', compact('weight_log'));
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function edit(Request $request) {
+        // idを指定せずに直接遷移した場合はリダイレクト
+        if(empty($request->id)) {
+            redirect('/weight/detail');
+        }
+
+        $weight = $this->weight_service->getWeightDataById($request->id);
+
+        return view('weight.edit', compact('weight'));
+    }
+
+
+    public function update(Request $request){
+        // 登録処理
+        $this->weight_service->update($request);
+        return redirect('/weight/detail');
     }
 }
