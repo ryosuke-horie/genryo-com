@@ -44,8 +44,8 @@
                         <div class="flex items-center mt-2 -mx-1">
                             <input id="weight" type="text" name="weight" placeholder="60"
                                 class="flex-1 block h-10 px-4 mx-1 text-sm text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                required>kg
-                            <input type="hidden" value="{{ $now }}" name="date_key">
+                                required>
+                                kg
                         </div>
                     </div>
 

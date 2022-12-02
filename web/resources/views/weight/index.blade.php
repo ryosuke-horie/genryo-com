@@ -15,7 +15,7 @@
                 @include('weight.weight-graph', [
                     'label'       => $label,
                     'weight_log'  => $weight_log,
-                    "game_weight" => $game_weight_log,
+                    "game_weight" => $game_weight_graph,
                 ])
             </div>
 
@@ -34,7 +34,7 @@
         </div>
 
         {{-- モーダル部分の読み込み --}}
-        @include('weight.input-modal', ['now' => $now])
+        @include('weight.input-modal')
 
     </section>
 @endsection
