@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\WeightRepositoryInterface;
+use Carbon\Carbon;
 
 class WeightService implements WeightServiceInterface
 {
@@ -29,6 +30,13 @@ class WeightService implements WeightServiceInterface
         }
 
         return $weight_log;
+    }
+
+    public function getWeekWeightLog($userId) {
+        $subWeek = Carbon::now()->subWeek();
+        $weightLog = $this->weight_repository->getWeightLogPerPeriod($userId ,$subWeek);
+        $weightLog = $weightLog->toArray();
+        return $weightLog;
     }
 
     /**

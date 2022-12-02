@@ -6,10 +6,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <!-- グラフを描画 -->
 <script>
-    //ラベル
+    // ラベル
     var labels = @json($label);
-
-    //最小体重ログ
+    // 体重ログ
     var weight_log = @json($weight_log);
     // 試合体重
     let game_weight = @json($game_weight)

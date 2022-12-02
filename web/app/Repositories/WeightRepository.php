@@ -24,6 +24,14 @@ class WeightRepository implements WeightRepositoryInterface
         return $weight;
     }
 
+    public function getWeightLogPerPeriod($userId, $period){
+        $logs = Weight::where('userId', $userId)
+            ->where('memoried_at', '>=', $period)
+            ->get();
+
+        return $logs;
+    }
+
     /**
      * ユーザーIDをもとに体重のログデータを取得する。
      *
