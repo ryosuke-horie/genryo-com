@@ -28,7 +28,7 @@ class WeightController extends Controller
     {
         $user_id = Auth::id();
 
-        // １週間分の体重ログデータ。
+        // １週間分の体重データ。
         $weight_logs_weekly = $this->weight_service->getWeekWeightLog($user_id);
 
         // 体重と記録日時をグラフ用の配列に変換
@@ -37,8 +37,9 @@ class WeightController extends Controller
         foreach($weight_logs_weekly as $data) {
             $weihgt_log[] = $data['weight'];
 
-            $date_label = substr($data['memoried_at'], 0, -3);
-            $date_label = substr($date_label, 5);
+            // datetime形式で記載するとラベルとして見づらいので整形する。
+            $date_label = substr($data['memoried_at'], 0, -3); // 秒以下を削除
+            $date_label = substr($date_label, 5);              // 先頭の年を削除
             $label[]    = $date_label;
         }
 

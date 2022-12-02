@@ -14,27 +14,19 @@ class WeightService implements WeightServiceInterface
         $this->weight_repository = $weight_repository;
     }
 
-
     /**
-     * 引数に渡した日付の体重のデータを取得
-     * 
-     * @param [type] $target_days
-     * @return array $weight_log
+     * 1週間前からのすべての体重データを取得する。
+     * @param mixed $userId
+     * @return array
      */
-     public function getWeightLog($target_days)
-    {
-        $weight_log = [];
-        foreach ($target_days as $date_key) {
-            $log = $this->weight_repository->getWeightLogData($date_key);
-            $weight_log[] = $log;
+    public function getWeekWeightLog($userId) {
+        $subWeek   = Carbon::now()->subWeek();
+        $weightLog = $this->weight_repository->getWeightLogPerPeriod($userId ,$subWeek);
+
+        if(empty($weightLog)) {
+            return [];
         }
 
-        return $weight_log;
-    }
-
-    public function getWeekWeightLog($userId) {
-        $subWeek = Carbon::now()->subWeek();
-        $weightLog = $this->weight_repository->getWeightLogPerPeriod($userId ,$subWeek);
         $weightLog = $weightLog->toArray();
         return $weightLog;
     }

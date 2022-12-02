@@ -8,22 +8,11 @@ use PhpParser\Node\Expr\FuncCall;
 class WeightRepository implements WeightRepositoryInterface
 {
     /**
-     * 日時を受け取り、その日の体重データを受け取る。
-     * @param $date_key
-     * @return int
+     * 引数に渡した日時から現在までの体重データを取得する。
+     * @param int    $userId
+     * @param string $period (timestampに合わせること)
+     * @return array
      */
-    public function getWeightLogData($date_key)
-    {
-        $weight = 0;
-        $logs = Weight::where("date_key", "like", $date_key . "%")->get();
-
-        foreach ($logs as $log) {
-            $weight = $log->weight;
-        }
-
-        return $weight;
-    }
-
     public function getWeightLogPerPeriod($userId, $period){
         $logs = Weight::where('userId', $userId)
             ->where('memoried_at', '>=', $period)
