@@ -88,25 +88,19 @@ class WeightController extends Controller
         return view('weight.edit', compact('weight'));
     }
 
-        /**
-     * 体重登録機能
-     * @param Request $request
-     * @return void
+    /**
+     * 体重ログ登録機能
      */
     public function store(Request $request)
     {
-        // 登録機能
-        $weight = new Weight();
-        $weight->create([
-            'userId' => Auth::id(),
-            'weight' => $request['weight'],
-        ]);
-
+        $this->weight_service->store($request);
         return redirect('/weight');
     }
 
+    /**
+     * 体重ログ更新機能
+     */
     public function update(Request $request){
-        // 登録処理
         $this->weight_service->update($request);
         return redirect('/weight/detail');
     }

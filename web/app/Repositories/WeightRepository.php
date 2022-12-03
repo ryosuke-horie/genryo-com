@@ -53,10 +53,28 @@ class WeightRepository implements WeightRepositoryInterface
         return $weight_log;
     }
 
+    /**
+     * 体重ログ登録
+     *
+     * @param [type] $weight_datas
+     * @return void
+     */
+    public function storeWeightLog($weight_datas){
+        $weight = new Weight();
+        $weight->userId = $weight_datas['userId'];
+        $weight->weight = $weight_datas['weight'];
+
+        $weight->save();
+    }
+
+    /**
+     * 体重ログ更新処理
+     * 
+     * @param mixed $weight_datas
+     * @return void
+     */
     public function update_weight_log($weight_datas){
         $weight = Weight::find($weight_datas['id']);
-
-        // 値を更新
         $weight->weight      = $weight_datas['weight'];
         $weight->memoried_at = $weight_datas['memoried_at'];
 
