@@ -32,10 +32,10 @@ class WeightController extends Controller
         $weight_logs_weekly = $this->weight_service->getWeekWeightLog($user_id);
 
         // 体重と記録日時をグラフ用の配列に変換
-        $weihgt_log = [];
+        $weight_log_graph = [];
         $label      = [];
         foreach($weight_logs_weekly as $data) {
-            $weihgt_log[] = $data['weight'];
+            $weight_log_graph[] = $data['weight'];
 
             // datetime形式で記載するとラベルとして見づらいので整形する。
             $date_label = substr($data['memoried_at'], 0, -3); // 秒以下を削除
@@ -58,7 +58,7 @@ class WeightController extends Controller
 
         return view("weight.index", [
             "label"             => $label,             // グラフのラベル(記録日時)
-            "weight_log"        => $weihgt_log,        // 体重データ
+            "weight_log"        => $weight_log_graph,  // 体重データ
             "game_weight"       => $game_weight,       // 試合体重
             "game_weight_graph" => $game_weight_graph, // 試合体重のグラフ用配列
             "weight_in"         => $weight_in,         // 軽量日
