@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Weight;
 use Illuminate\Http\Request;
 use Auth;
-use Carbon\Carbon;
 use App\Services\WeightServiceInterface;
 use App\Services\GameWeightServiceInterface;
 
@@ -66,23 +65,6 @@ class WeightController extends Controller
     }
 
     /**
-     * 表示ページ
-     */
-    public function show()
-    {
-        return view('weight.show');
-    }
-
-    /**
-     * 入力ページ
-     */
-    public function input()
-    {
-        $now = Carbon::now()->format('Ymd');
-        return view('weight.input', compact('now'));
-    }
-
-    /**
      * 体重登録機能
      * @param Request $request
      * @return void
@@ -111,10 +93,7 @@ class WeightController extends Controller
     }
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $id
-     * @return void
+     * 体重記録編集ページ
      */
     public function edit(Request $request) {
         // idを指定せずに直接遷移した場合はリダイレクト
