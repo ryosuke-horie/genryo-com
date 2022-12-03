@@ -17,7 +17,7 @@ class WeightController extends Controller
 
     public function __construct(WeightServiceInterface $weight_service, GameWeightServiceInterface $game_weight_service)
     {
-        $this->weight_service = $weight_service;
+        $this->weight_service      = $weight_service;
         $this->game_weight_service = $game_weight_service;
     }
 
@@ -26,50 +26,42 @@ class WeightController extends Controller
      */
     public function index(Request $request)
     {
-        // １週間分の日付を取得。
-        $now   = new Carbon('now');
-        $one   = new Carbon('-1 day');
-        $two   = new Carbon('-2 day');
-        $three = new Carbon('-3 day');
-        $four  = new Carbon('-4 day');
-        $five  = new Carbon('-5 day');
-        $six   = new Carbon('-6 day');
+        $user_id = Auth::id();
 
-        // 取り出す対象日時
-        $target_days = [
-            $six->format('Ymd'),
-            $five->format('Ymd'),
-            $four->format('Ymd'),
-            $three->format('Ymd'),
-            $two->format('Ymd'),
-            $one->format('Ymd'),
-            $now->format('Ymd'),
-        ];
+        // １週間分の体重データ。
+        $weight_logs_weekly = $this->weight_service->getWeekWeightLog($user_id);
 
-        // １週間分の体重ログデータ。
-        $weihgt_log = $this->weight_service->getWeightLog($target_days);
-        // 試合体重(グラフ用)
-        $game_weight_log = $this->game_weight_service->getGameWeightByUserIdForWeek(Auth::id());
-        // 試合体重(表示用)
-        $game_weight = $this->game_weight_service->getGameWeightByUserId(Auth::id());
+        // 体重と記録日時をグラフ用の配列に変換
+        $weihgt_log = [];
+        $label      = [];
+        foreach($weight_logs_weekly as $data) {
+            $weihgt_log[] = $data['weight'];
+
+            // datetime形式で記載するとラベルとして見づらいので整形する。
+            $date_label = substr($data['memoried_at'], 0, -3); // 秒以下を削除
+            $date_label = substr($date_label, 5);              // 先頭の年を削除
+            $label[]    = $date_label;
+        }
+
+        // 試合体重を取得
+        $game_weight = $this->game_weight_service->getGameWeightByUserId($user_id);
+
+        // 試合体重をグラフ用に加工
+        // chart.jsで表示するために体重ログデータの数と同じ配列にする。
+        $game_weight_graph = [];
+        for ($i = 1; $i <= count($label); $i++) {
+            $game_weight_graph[] = $game_weight;
+        }
+
         // 軽量日
-        $weight_in = $this->game_weight_service->getWeightInByUseId(Auth::id());
+        $weight_in = $this->game_weight_service->getWeightInByUseId($user_id);
 
         return view("weight.index", [
-            "label" => [
-                $six->format('m月d日'),
-                $five->format('m月d日'),
-                $four->format('m月d日'),
-                $three->format('m月d日'),
-                $two->format('m月d日'),
-                $one->format('m月d日'),
-                $now->format('m月d日'),
-            ],
-            "weight_log"      => $weihgt_log,
-            "now"             => $now->format('Ymd'),
-            "game_weight"     => $game_weight,
-            "weight_in"       => $weight_in,
-            "game_weight_log" => $game_weight_log,
+            "label"             => $label,             // グラフのラベル(記録日時)
+            "weight_log"        => $weihgt_log,        // 体重データ
+            "game_weight"       => $game_weight,       // 試合体重
+            "game_weight_graph" => $game_weight_graph, // 試合体重のグラフ用配列
+            "weight_in"         => $weight_in,         // 軽量日
         ]);
     }
 
