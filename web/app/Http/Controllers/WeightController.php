@@ -52,7 +52,7 @@ class WeightController extends Controller
         for ($i = 1; $i <= count($label); $i++) {
             $game_weight_graph[] = $game_weight;
         }
-        
+
         // 軽量日
         $weight_in = $this->game_weight_service->getWeightInByUseId($user_id);
 
