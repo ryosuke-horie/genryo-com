@@ -65,24 +65,6 @@ class WeightController extends Controller
     }
 
     /**
-     * 体重登録機能
-     * @param Request $request
-     * @return void
-     */
-    public function memoryWeight(Request $request)
-    {
-        // 登録機能
-        $weight = new Weight();
-        $weight->create([
-            'userId' => Auth::id(),
-            'weight' => $request['weight'],
-            'date_key' => $request['date_key']
-        ]);
-
-        return redirect('/weight');
-    }
-
-    /**
      * 詳細ページ
      */
     public function detail()
@@ -106,6 +88,22 @@ class WeightController extends Controller
         return view('weight.edit', compact('weight'));
     }
 
+        /**
+     * 体重登録機能
+     * @param Request $request
+     * @return void
+     */
+    public function store(Request $request)
+    {
+        // 登録機能
+        $weight = new Weight();
+        $weight->create([
+            'userId' => Auth::id(),
+            'weight' => $request['weight'],
+        ]);
+
+        return redirect('/weight');
+    }
 
     public function update(Request $request){
         // 登録処理

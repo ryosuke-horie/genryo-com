@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                <form class="mt-6" method="POST" action="/weight/memoryWeight">
+                <form class="mt-6" method="POST" action="/weight/store">
                     @csrf
                     <div class="mt-4">
                         <label class="text-sm text-gray-700 dark:text-gray-200" for="share link">体重</label>

@@ -22,7 +22,7 @@ Route::get('/weight/detail', [WeightController::class, 'detail'])->middleware(['
 // 編集ページ
 Route::get('/weight/edit', [WeightController::class, 'edit'])->middleware(['auth:users']);
 // 体重入力記録機能
-Route::post('/weight/memoryWeight', [WeightController::class, 'memoryWeight'])->middleware(['auth:users']);
+Route::post('/weight/store', [WeightController::class, 'store'])->middleware(['auth:users']);
 // 体重入力修正機能
 Route::post('/weight/update', [WeightController::class, 'update'])->middleware(['auth:users']);
 
