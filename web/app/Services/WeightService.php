@@ -24,11 +24,6 @@ class WeightService implements WeightServiceInterface
         $subWeek   = Carbon::now()->subWeek();
         $weightLog = $this->weight_repository->getWeightLogPerPeriod($userId ,$subWeek);
 
-        if(empty($weightLog)) {
-            return [];
-        }
-
-        $weightLog = $weightLog->toArray();
         return $weightLog;
     }
 
@@ -41,10 +36,6 @@ class WeightService implements WeightServiceInterface
     public function weightLogList($userId)
     {
         $weight_log = $this->weight_repository->getWeightLogById($userId);
-
-        if (empty($weight_log)) {
-            return [];
-        }
 
         // Changing the display format of the recording date and time(updated_at).
         foreach($weight_log as $key => $val){
