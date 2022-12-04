@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\WeightRepositoryInterface;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class WeightService implements WeightServiceInterface
 {
@@ -60,8 +61,17 @@ class WeightService implements WeightServiceInterface
         return $weight_log;
     }
 
-    public function update($update_requests){
-        $weight_datas = $update_requests->toArray();
+    public function store($request){
+        $request = $request->toArray();
+        $store_data = [];
+        $store_data['userId'] = Auth::id();
+        $store_data['weight'] = $request['weight'];
+
+        $this->weight_repository->storeWeightLog($store_data);
+    }
+
+    public function update($request){
+        $weight_datas = $request->toArray();
 
         // 体重記録時間を調整し、配列を更新する
         $replaced_momoried_at = str_replace('T', ' ', $weight_datas['memoried_at']);

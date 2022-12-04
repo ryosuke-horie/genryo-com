@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Weight;
 use Illuminate\Http\Request;
 use Auth;
-use Carbon\Carbon;
 use App\Services\WeightServiceInterface;
 use App\Services\GameWeightServiceInterface;
 
@@ -32,10 +31,10 @@ class WeightController extends Controller
         $weight_logs_weekly = $this->weight_service->getWeekWeightLog($user_id);
 
         // 体重と記録日時をグラフ用の配列に変換
-        $weihgt_log = [];
+        $weight_log_graph = [];
         $label      = [];
         foreach($weight_logs_weekly as $data) {
-            $weihgt_log[] = $data['weight'];
+            $weight_log_graph[] = $data['weight'];
 
             // datetime形式で記載するとラベルとして見づらいので整形する。
             $date_label = substr($data['memoried_at'], 0, -3); // 秒以下を削除
@@ -58,46 +57,11 @@ class WeightController extends Controller
 
         return view("weight.index", [
             "label"             => $label,             // グラフのラベル(記録日時)
-            "weight_log"        => $weihgt_log,        // 体重データ
+            "weight_log"        => $weight_log_graph,  // 体重データ
             "game_weight"       => $game_weight,       // 試合体重
             "game_weight_graph" => $game_weight_graph, // 試合体重のグラフ用配列
             "weight_in"         => $weight_in,         // 軽量日
         ]);
-    }
-
-    /**
-     * 表示ページ
-     */
-    public function show()
-    {
-        return view('weight.show');
-    }
-
-    /**
-     * 入力ページ
-     */
-    public function input()
-    {
-        $now = Carbon::now()->format('Ymd');
-        return view('weight.input', compact('now'));
-    }
-
-    /**
-     * 体重登録機能
-     * @param Request $request
-     * @return void
-     */
-    public function memoryWeight(Request $request)
-    {
-        // 登録機能
-        $weight = new Weight();
-        $weight->create([
-            'userId' => Auth::id(),
-            'weight' => $request['weight'],
-            'date_key' => $request['date_key']
-        ]);
-
-        return redirect('/weight');
     }
 
     /**
@@ -111,10 +75,7 @@ class WeightController extends Controller
     }
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $id
-     * @return void
+     * 体重記録編集ページ
      */
     public function edit(Request $request) {
         // idを指定せずに直接遷移した場合はリダイレクト
@@ -127,9 +88,19 @@ class WeightController extends Controller
         return view('weight.edit', compact('weight'));
     }
 
+    /**
+     * 体重ログ登録機能
+     */
+    public function store(Request $request)
+    {
+        $this->weight_service->store($request);
+        return redirect('/weight');
+    }
 
+    /**
+     * 体重ログ更新機能
+     */
     public function update(Request $request){
-        // 登録処理
         $this->weight_service->update($request);
         return redirect('/weight/detail');
     }
