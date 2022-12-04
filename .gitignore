@@ -6,3 +6,6 @@
 /web/.env
 /web/composer.json
 /web/composer.lock
+.idea/
+.ssh/
+.vscode/
