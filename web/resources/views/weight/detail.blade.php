@@ -27,7 +27,9 @@
             </tbody>
         </table>
     @else
-        データは未登録です。
+        <div class="flex justify-center">
+            データは未登録です。
+        </div>
     @endif
 @endsection
 

@@ -11,12 +11,18 @@
     <section class="text-gray-600 body-font">
         <div class="container mx-auto flex px-5 py-24 flex-col items-center">
             <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
-                {{-- グラフ部分の読み込み --}}
-                @include('weight.weight-graph', [
-                    'label'       => $label,
-                    'weight_log'  => $weight_log,
-                    "game_weight" => $game_weight_graph,
-                ])
+                @if(!@empty($weight_log))
+                    {{-- グラフ部分の読み込み --}}
+                    @include('weight.weight-graph', [
+                        'label'       => $label,
+                        'weight_log'  => $weight_log,
+                        "game_weight" => $game_weight_graph,
+                    ])
+                @else
+                    <div class="flex justify-center py-4">
+                        体重の入力後、こちらにグラフを表示します。
+                    </div>
+                @endif
             </div>
 
             <div class="lg:flex-grow md:w-1/2 lg:pl-24 flex flex-col md:items-start md:text-left items-center text-center">
