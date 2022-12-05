@@ -48,8 +48,10 @@ class WeightController extends Controller
         // 試合体重をグラフ用に加工
         // chart.jsで表示するために体重ログデータの数と同じ配列にする。
         $game_weight_graph = [];
-        for ($i = 1; $i <= count($label); $i++) {
-            $game_weight_graph[] = $game_weight;
+        if(!empty($game_weight)){
+            for ($i = 1; $i <= count($label); $i++) {
+                $game_weight_graph[] = $game_weight;
+            }    
         }
 
         // 軽量日

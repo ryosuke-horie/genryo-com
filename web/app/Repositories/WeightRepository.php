@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Weight;
-use PhpParser\Node\Expr\FuncCall;
 
 class WeightRepository implements WeightRepositoryInterface
 {
@@ -17,6 +16,12 @@ class WeightRepository implements WeightRepositoryInterface
         $logs = Weight::where('userId', $userId)
             ->where('memoried_at', '>=', $period)
             ->get();
+
+        if(!empty($logs)) {
+            $logs = $logs->toArray();
+        } else {
+            $logs = [];
+        }
 
         return $logs;
     }
@@ -48,7 +53,11 @@ class WeightRepository implements WeightRepositoryInterface
      */
     public function getWeightDataById($id){
         $weight_log = Weight::where("id", "=", $id)->first();
-        $weight_log = $weight_log->toArray();
+        if(!empty($weight_log)) {
+            $weight_log = $weight_log->toArray();
+        } else {
+            $weight_log = [];
+        }
 
         return $weight_log;
     }
