@@ -3,9 +3,9 @@
 .htaccess
 /storage
 /config
+/node_modules
 .env
 .editorconfig
 .env.example
 .env.testing
 .phpunit.result.cache
-.
