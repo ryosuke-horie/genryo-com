@@ -4,13 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WeightController;
 use App\Http\Controllers\GameWeightController;
 
-Route::get('/', function () {
-    return view('user.welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('user.dashboard');
-})->middleware(['auth:users'])->name('dashboard');
+Route::redirect('/', '/login');
+Route::redirect('/dashbord', '/weight');
 
 Route::middleware(['auth:users'])->group(function () {
     /**

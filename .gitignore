@@ -9,3 +9,7 @@
 .idea/
 .ssh/
 .vscode/
+docker-compose.yml
+Dockerfile
+env.production
+
