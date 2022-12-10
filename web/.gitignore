@@ -1,1 +1,11 @@
+*.log
+*.sqlite
+.htaccess
+/storage
+/config
 .env
+.editorconfig
+.env.example
+.env.testing
+.phpunit.result.cache
+.
