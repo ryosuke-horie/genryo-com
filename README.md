@@ -1,26 +1,22 @@
-# 開発メモ
+# 格闘技向け減量アプリ
 
-## build 
----
-#Build
-docker-compose up -d
-#コンテナ内に入る
-docker-compose exec lara_base_web bash
----
+## features
+- 試合日/出場体重登録機能
+    - 計量を意識した機能。登録することで1ページ目に表示され、グラフにも目安の値として表示される。これによって体重管理がより簡単になる。
+- 体重ログのグラフ化
+    - 1週間の体重の増減がひと目でわかる折れ線グラフを採用
+    - 試合出場体重を設定すればこちらにも表示。
 
-## DBログイン
-```
-#dbコンテナ内に入る
-$ docker compose exec lara_base_db bash
+## Requirement
+- chart.js(グラフの描写に使用)
+- Laravel breeeze(認証)
 
-#ログイン
-$ mysql -u laravel -p secret
-```
+## Usage
+https://martial-genryo.space
 
-
-## migrateの実行
-webコンテナに入りその中で実行する
-```
-$ php artisan migrate
-```# weight-management
-# weight-management
+## Note
+ 
+注意点などがあれば書く
+ 
+## Author
+* ryosuke-horie
