@@ -3,7 +3,7 @@
 @include('./layouts/header')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('/css/weight.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('/css/weight.css') }}">
     @include('weight.game-weight', [
         "game_weight" => $game_weight,
         "weight_in"   => $weight_in,
@@ -46,4 +46,4 @@
 @endsection
 
 @include('./layouts/footer')
-<script src="{{ asset('js/weight.js') }}"></script>
+<script src="{{ secure_asset('js/weight.js') }}"></script>
