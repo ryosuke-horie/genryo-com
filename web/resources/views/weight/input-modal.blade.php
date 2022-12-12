@@ -12,19 +12,6 @@
             <div
                 class="popup relative inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl dark:bg-gray-900 sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
                 <div>
-                    {{-- アイコンをおく予定 --}}
-                    {{-- <div class="flex items-center justify-center ">
-                        <img class="object-cover w-12 h-12 rounded-full ring ring-white"
-                            src="https://images.unsplash.com/photo-1490195117352-aa267f47f2d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                            alt="">
-                        <img class="object-cover w-12 h-12 -mx-4 rounded-full ring ring-white"
-                            src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                            alt="">
-                        <img class="object-cover w-12 h-12 rounded-full ring ring-white"
-                            src="https://images.unsplash.com/photo-1496345875659-11f7dd282d1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-                            alt="">
-                    </div> --}}
-
                     <div class="mt-4 text-center">
                         <h3 class="font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">
                             体重を記録
