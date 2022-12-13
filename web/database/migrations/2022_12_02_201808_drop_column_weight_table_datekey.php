@@ -13,9 +13,10 @@ class DropColumnWeightTableDatekey extends Migration
      */
     public function up()
     {
-        Schema::table('weight', function (Blueprint $table) {
-            $table->dropColumn('date_key');
-        });
+        // 一度実行したら次からはエラーになるので修正。
+        // Schema::table('weight', function (Blueprint $table) {
+        //     $table->dropColumn('date_key');
+        // });
     }
 
     /**
