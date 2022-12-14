@@ -14,6 +14,10 @@
 ## Usage
 https://martial-genryo.space
 
+###テスト用ログインは以下のアカウントをご使用ください。
+test@example.com/test_genryo
+
+
 ## Note
  
 注意点などがあれば書く
