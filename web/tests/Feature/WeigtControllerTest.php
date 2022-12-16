@@ -13,8 +13,6 @@ use Tests\TestCase;
 class WeigtControllerTest extends TestCase
 {
     use RefreshDatabase;
-    // テスト前にseederを実行する。
-    // protected $seed = true;
 
     /** @test */
     public function 体重TOPのURLにアクセスして画面が表示される()
@@ -33,8 +31,6 @@ class WeigtControllerTest extends TestCase
      */
     public function 体重詳細のURLにアクセスして画面が表示される()
     {
-                // DatabaseSeederを実行
-                // $this->seed();
                 $this->withoutExceptionHandling();
         
                 $response = $this->actingAs(User::find(1))
@@ -47,8 +43,6 @@ class WeigtControllerTest extends TestCase
      */
     public function 体重編集のURLにアクセスして画面が表示される()
     {
-                // DatabaseSeederを実行
-                // $this->seed();
                 $this->withoutExceptionHandling();
         
                 $response = $this->actingAs(User::find(1))
