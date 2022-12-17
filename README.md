@@ -20,7 +20,5 @@ test@example.com/test_genryo
 
 ## Note
  
-注意点などがあれば書く
- 
 ## Author
 * ryosuke-horie
