@@ -9,13 +9,14 @@
 
 ## Requirement
 - chart.js(グラフの描写に使用)
-- Laravel breeeze(認証)
+- Laravel breeeze(認証関連)
 
 ## Usage
 https://martial-genryo.space
 
 ### テスト用ログインは以下のアカウントをご使用ください。
-test@example.com/test_genryo
+test@example.com
+PW:test_genryo
 
 
 ## Note
