@@ -17,9 +17,3 @@ https://martial-genryo.space
 ### テスト用ログインは以下のアカウントをご使用ください。
 test@example.com
 PW:test_genryo
-
-
-## Note
- 
-## Author
-* ryosuke-horie
