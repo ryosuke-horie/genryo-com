@@ -7,7 +7,7 @@ use App\Models\Weight;
 class WeightRepository implements WeightRepositoryInterface
 {
     /**
-     * 引数に渡した日時から現在までの体重データを取得する。
+     * 引数に渡した日時から現在までの体重データを取得
      * @param int    $userId
      * @param string $period (timestampに合わせること)
      * @return array
